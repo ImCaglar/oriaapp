@@ -57,11 +57,19 @@ export default function Home() {
     window.location.reload();
   };
 
+  const resetToHome = () => {
+    setMessages([]);
+    setInput("");
+    setExtractedText("");
+    setSelectedFile(null);
+    setSelectedCategory(null);
+  };
+
   const suggestedActions = [
-    { title: "Otel hizmetleri", subtitle: "nelerdir?", action: "Otel hizmetleri nelerdir?" },
-    { title: "PDF analizi", subtitle: "nasıl yapılır?", action: "PDF analizi nasıl yapılır?" },
-    { title: "Oda servisi", subtitle: "nasıl çalışır?", action: "Oda servisi nasıl çalışır?" },
-    { title: "Rezervasyon", subtitle: "nasıl yapabilirim?", action: "Rezervasyon nasıl yapabilirim?" },
+    { title: "Müşteri soruları", subtitle: "nasıl öğrenmek istiyorsun?", action: "Müşteri soruları nasıl öğrenmek istiyorsun?" },
+    { title: "SPA rezervasyonu", subtitle: "hangi soruları sormalıyım?", action: "SPA rezervasyonu hangi soruları sormalıyım?" },
+    { title: "Öğrenme süreci", subtitle: "nasıl çalışıyor?", action: "Öğrenme süreci nasıl çalışıyor?" },
+    { title: "Soru önerileri", subtitle: "nasıl verebilirim?", action: "Soru önerileri nasıl verebilirim?" },
   ];
 
   // Show login screen if not logged in
@@ -100,17 +108,17 @@ export default function Home() {
         let analysisMessage = '';
         
         if (text.includes('📝 ÇİKARILAN METİN İÇERİĞİ:')) {
-          analysisMessage = `Harika! **${selectedFile.name}** dosyanızı başarıyla analiz ettim. 
+          analysisMessage = `✅ **${selectedFile.name}** dosyası başarıyla analiz edildi. 
 
-**${category.name}** kategorisinde zengin bir içerik buldum. Size en uygun seçenekleri sunabilmem için aşağıdakilerden hangisini tercih edersiniz?
+**${category.name}** verilerini inceledim. Artık mobil app'te müşterilerle etkileşim kurabilmek için soru setimi hazırlayabilirim.
 
 ${getCategoryQuestions(category.id)}
 
-Hemen size özel öneriler hazırlayabilirim! ✨`;
+Önerilerinizi alarak soru setimi güncelleyeceğim!`;
         } else {
-          analysisMessage = `**${selectedFile.name}** dosyanız yüklendi. 
+          analysisMessage = `📄 **${selectedFile.name}** dosyası yüklendi. 
 
-${category.name} kategorisinde size nasıl yardımcı olabilirim? Aradığınız özel bir hizmet var mı?
+**${category.name}** kategorisi için mobil app'te müşterilerle nasıl etkileşim kurmayı planlıyorum:
 
 ${getCategoryQuestions(category.id)}`;
         }
@@ -132,25 +140,44 @@ ${getCategoryQuestions(category.id)}`;
   const getCategoryQuestions = (categoryId: string) => {
     switch (categoryId) {
       case 'spa':
-        return `• **Fiyat tercihiniz** nedir? (ekonomik, orta, premium)
-• Hangi **hizmet türünü** arıyorsunuz? (masaj, yüz bakımı, vücut bakımı)
-• **Süre** konusunda tercihiniz? (kısa molalar, uzun dinlenme)
-• Özel bir **ihtiyacınız** var mı?`;
+        return `Mobil app'te SPA rezervasyonu yapan müşterilere şu soruları sormayı planlıyorum:
+
+• **Ne zaman** geleceksiniz? (bugün, bu hafta, gelecek ay)
+• **Kaç kişi** için rezervasyon? (tek, çift, grup)
+• **Hangi hizmet türü** ilginizi çekiyor? (masaj, yüz bakımı, vücut bakımı)
+• **Süre tercihiniz** nedir? (kısa seans, uzun seans)
+• **Bütçe aralığınız** nedir?
+
+**Bu sorular yeterli mi? Başka hangi soruları da eklememi önerirsiniz?**`;
       case 'food':
-        return `• **Hangi öğün** için menü arıyorsunuz?
-• **Yemek veya içecek** tercihiniz nedir? (ana yemek, meze, tatlı, içecek)
-• **Diyet** ihtiyaçlarınız var mı? (vejetaryen, vegan, glutensiz)
-• **Fiyat aralığınız** nedir?`;
+        return `Mobil app'te yemek siparişi veren müşterilere şu soruları sormayı planlıyorum:
+
+• **Hangi öğün** için sipariş veriyorsunuz?
+• **Ne tür yemek** arıyorsunuz? (ana yemek, meze, tatlı, içecek)
+• **Diyet kısıtlamalarınız** var mı? (vejetaryen, vegan, glutensiz)
+• **Acil** mi yoksa **normal teslimat** mı?
+• **Bütçe aralığınız** nedir?
+
+**Bu sorular yeterli mi? Başka hangi soruları da eklememi önerirsiniz?**`;
       case 'events':
-        return `• **Ne zaman** katılmak istiyorsunuz? (bugün, bu hafta)
+        return `Mobil app'te etkinlik rezervasyonu yapan müşterilere şu soruları sormayı planlıyorum:
+
+• **Ne zaman** katılmak istiyorsunuz? (bugün, bu hafta)
 • **Kimlerle** geliyorsunuz? (tek, çift, aile, grup)
 • **Hangi tür** etkinlik ilginizi çekiyor?
-• **İç/dış mekan** tercihiniz var mı?`;
+• **İç/dış mekan** tercihiniz var mı?
+• **Yaş grubu** nedir? (yetişkin, çocuklu aile)
+
+**Bu sorular yeterli mi? Başka hangi soruları da eklememi önerirsiniz?**`;
       default:
-        return `• **Hangi bilgileri** arıyorsunuz? (fiyatlar, saatler, şartlar)
-• **Acil** bir ihtiyacınız mı var?
-• **Özel** bir durum söz konusu mu?
-• Size nasıl **yardımcı** olabilirim?`;
+        return `Mobil app'te bu kategori için müşterilere şu soruları sormayı planlıyorum:
+
+• **Hangi hizmet** ilginizi çekiyor?
+• **Ne zaman** ihtiyacınız var?
+• **Özel gereksinimleriniz** var mı?
+• **Bütçe aralığınız** nedir?
+
+**Bu sorular yeterli mi? Başka hangi soruları da eklememi önerirsiniz?**`;
     }
   };
 
@@ -185,11 +212,8 @@ ${getCategoryQuestions(category.id)}`;
             className="text-center mb-12 max-w-2xl"
           >
             <h1 className="text-4xl font-light text-white mb-4">
-              Merhaba!
+              Merhaba
             </h1>
-            <p className="text-xl text-gray-400 font-light">
-              Size bugün nasıl yardımcı olabilirim?
-            </p>
           </motion.div>
 
           {/* Suggested Actions */}
@@ -385,11 +409,11 @@ GÖREV: Kullanıcıdan PDF içeriğini tarif etmesini iste veya ${selectedCatego
       {/* Top Bar with Logout - Fixed position */}
       <div className="fixed top-4 right-4 flex items-center gap-3 z-50">
         <button
-          onClick={clearAllData}
+          onClick={resetToHome}
           className="text-xs text-gray-500 hover:text-gray-300 transition-colors"
-          title="Tüm verileri temizle"
+          title="Ana ekrana dön"
         >
-          Reset
+          Ana Ekran
         </button>
         <button
           onClick={handleLogout}
