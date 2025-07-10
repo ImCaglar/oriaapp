@@ -358,7 +358,7 @@ const sendMessage = async (message: string) => {
               </h4>
               <div className="space-y-2 text-sm">
                 <p><strong>Kategori:</strong> {category === 'spa' ? 'SPA' : category === 'food' ? 'Yemek' : category === 'events' ? 'Etkinlik' : 'Genel'}</p>
-                <p><strong>Soru:</strong> "{question}"</p>
+                <p><strong>Soru:</strong> &quot;{question}&quot;</p>
                 <p><strong>Açıklama:</strong> {explanation}</p>
                 <p className="text-green-700 dark:text-green-300 font-medium">
                   ✅ Artık {category === 'spa' ? 'SPA' : category === 'food' ? 'yemek' : category === 'events' ? 'etkinlik' : 'genel'} kategorisinde bu soruyu da soracağım!
@@ -435,7 +435,7 @@ const sendMessage = async (message: string) => {
                         {learnedQuestions[cat].map((question, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <span className="text-blue-500">•</span>
-                            <span>"{question}"</span>
+                            <span>&quot;{question}&quot;</span>
                           </li>
                         ))}
                       </ul>
@@ -512,7 +512,7 @@ const sendMessage = async (message: string) => {
               </h4>
                              <div className="space-y-2 text-sm">
                 <p><strong>Kategori:</strong> {category === 'spa' ? 'SPA' : category === 'food' ? 'Yemek' : category === 'events' ? 'Etkinlik' : 'Genel'}</p>
-                <p><strong>Talimatınız:</strong> "{instruction}"</p>
+                <p><strong>Talimatınız:</strong> &quot;{instruction}&quot;</p>
                 <p className="text-orange-700 dark:text-orange-300 font-medium">
                   {willApply ? 
                     "✅ Tamam, dikkate alırım! Şimdi bu talimata göre hizmetleri düzenleyeceğim." :
@@ -590,7 +590,7 @@ const sendMessage = async (message: string) => {
                         {instructions[cat].map((instruction, idx) => (
                           <li key={idx} className="flex items-start gap-2">
                             <span className="text-purple-500">📋</span>
-                            <span>"{instruction}"</span>
+                            <span>&quot;{instruction}&quot;</span>
                           </li>
                         ))}
                       </ul>
