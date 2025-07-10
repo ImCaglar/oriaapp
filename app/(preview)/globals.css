@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+    --foreground-rgb: 0, 0, 0;
+    --background-start-rgb: 214, 219, 220;
+    --background-end-rgb: 255, 255, 255;
+}
+
+@font-face {
+    font-family: "uncut sans";
+    src: url("./uncut-sans.woff2") format("woff2");
+}
+
+* {
+    font-family: 'Inter', "uncut sans", system-ui, -apple-system, sans-serif;
+}
+
+/* Chat specific typography improvements */
+.chat-text {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.chat-heading {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 600;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --foreground-rgb: 255, 255, 255;
+        --background-start-rgb: 0, 0, 0;
+        --background-end-rgb: 0, 0, 0;
+    }
+}
+
+body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+            to bottom,
+            transparent,
+            rgb(var(--background-end-rgb))
+        )
+        rgb(var(--background-start-rgb));
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+@layer utilities {
+    .text-balance {
+        text-wrap: balance;
+    }
+}
